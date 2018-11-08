@@ -12,26 +12,28 @@ class LoginState extends State<Login> {
   @override
   final TextEditingController _userController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
-  String _welcomeString="";
-void _clear()
-{
-  setState(() {
-    _userController.clear();
-    _passwordController.clear();
-    _welcomeString="";
-  }
-  );
-}
-void _welcome()
-{
-  setState(() {
-    if (_userController.text.isNotEmpty&&_passwordController.text.isNotEmpty)
-      _welcomeString=_userController.text+" Welcome !";
-    else
-      _welcomeString="Invalid";
+  String _welcomeString = "";
 
-  });
+  void _clear() {
+    setState(() {
+      _userController.clear();
+      _passwordController.clear();
+      _welcomeString = "";
+    }
+    );
   }
+
+  void _welcome() {
+    setState(() {
+      if (_userController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty)
+        _welcomeString = _userController.text + " Welcome !";
+      else
+        _welcomeString = "Invalid";
+    }
+    );
+  }
+
   Widget build(BuildContext context) {
     // TODO: implement build
     return (new Scaffold(
@@ -42,10 +44,11 @@ void _welcome()
               style: new TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.normal,
-              )),
+              )
+          ),
           backgroundColor: Colors.green.shade400,
         ),
-        body: new Column(
+        body: new ListView(
           children: <Widget>[
             new Image.asset(
               '/Users/ashukumar/IdeaProjects/long_app/images/face.png',
@@ -68,31 +71,31 @@ void _welcome()
                       controller: _passwordController,
                       decoration: new InputDecoration(
                           icon: new Icon(Icons.person), hintText: 'Password'),
+                      obscureText: true,
                     ),
                     new Padding(padding: EdgeInsets.all(15.0)),
                     new Center(
                         child: new Row(
                       children: <Widget>[
-                        new Container
-                          (
-                          margin: const EdgeInsets.only(left: 48.0),
-                        child: new RaisedButton(
-                          onPressed: () =>_welcome(),
-                          color: Colors.blueAccent,
-                          child: new Text("Login",
-                              style: new TextStyle(
-                                  fontSize: 16.0, color: Colors.white)),
-                        )
+                        new Container(
+                            margin: const EdgeInsets.only(left: 48.0),
+                            child: new RaisedButton(
+                              onPressed: () => _welcome(),
+                              color: Colors.blueAccent,
+                              child: new Text("Login",
+                                  style: new TextStyle(
+                                      fontSize: 16.0, color: Colors.white)),
+                            )
                         ),
                         new Container(
                           margin: const EdgeInsets.only(left: 148.0),
-                        child: new RaisedButton(
-                          onPressed: () => _clear(),
-                          color: Colors.blueAccent,
-                          child: new Text("Clear",
-                              style: new TextStyle(
-                                  fontSize: 16.0, color: Colors.white)),
-                        ),
+                          child: new RaisedButton(
+                            onPressed: () => _clear(),
+                            color: Colors.blueAccent,
+                            child: new Text("Clear",
+                                style: new TextStyle(
+                                    fontSize: 16.0, color: Colors.white)),
+                          ),
                         ),
                       ],
                     )
@@ -101,8 +104,10 @@ void _welcome()
                 )
             ),
             new Padding(padding: EdgeInsets.all(15.0)),
-            new Text("$_welcomeString !",style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0))
-
+            new Center(
+                child: new Text("$_welcomeString !",
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20.0)))
           ],
         )
     )
